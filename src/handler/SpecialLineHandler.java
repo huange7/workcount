@@ -32,32 +32,52 @@ public class SpecialLineHandler extends Handler {
     @Override
     public void handleRequest(String line) {
         // 设置空行正则表达式
-        String emptyPattern = "[\\s{}]+";
+        String emptyPattern = "[\\s{}]?";
 
-        // 设置注释表达式
-        String annotationOpenPattern = ".*;?.*/[*|/].*";
+        // /*注释开始标记
+        String startAnnotationA = "^[\\s]*/\\*.*";
 
-        String annotationEndPattern = ".*\\*/";
+        // /*注释行文中开始标记
+        String startAnnotationB = ".*[;})][\\s]*/\\*.*";
 
-        if (line.matches(annotationOpenPattern)){
-            if (line.matches(annotationEndPattern)){
+        // //注释开始标记
+        String startAnnotationC = "^[\\s]*//.*";
+
+        // //注释行文中开始标记
+        String startAnnotationD = ".*[;})][\\s]*//.*";
+
+        // */注释结束标记
+        String endAnnotation = ".*\\*/[\\s]*$";
+
+        if (isAnnotation && line.matches(endAnnotation)){
+            // 匹配到已经是注释模式且已经找到结束位置
+            isAnnotation = false;
+            annotationLine++;
+        } else if (isAnnotation){
+            annotationLine++;
+        } else if (line.matches(startAnnotationA) || line.matches(startAnnotationB)){
+            if (!line.matches(endAnnotation)){
                 isAnnotation = true;
-            }else if (line.startsWith("//")){
-
             }
             annotationLine++;
-        } else if (line.matches(annotationEndPattern)){
-            annotationLine++;
-            isAnnotation = false;
-        } else if (isAnnotation){
+        } else if (line.matches(startAnnotationC) || line.matches(startAnnotationD)){
             annotationLine++;
         } else if (line.matches(emptyPattern)){
             emptyLine++;
-        } else if ("".equals(line)){
-            emptyLine++;
-        } else{
+        } else {
             codeLine++;
         }
+
+        if (line.matches(startAnnotationB) || line.matches(startAnnotationD)){
+            codeLine++;
+        }
+
+        setCount(getCount() + 1);
+
+        if (getSuccessor() != null){
+            getSuccessor().handleRequest(line);
+        }
+
     }
 
     @Override
