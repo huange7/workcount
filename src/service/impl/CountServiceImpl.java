@@ -5,6 +5,9 @@ import service.CountService;
 import util.ArgsUtil;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @ClassName CountServiceImpl
@@ -53,5 +56,9 @@ public class CountServiceImpl implements CountService {
         while ((line = reader.readLine()) != null) {
             head.handleRequest(line);
         }
+    }
+    
+    private void readDirectory(String fileName){
+
     }
 }

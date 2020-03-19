@@ -32,7 +32,7 @@ public class SpecialLineHandler extends Handler {
     @Override
     public void handleRequest(String line) {
         // 设置空行正则表达式
-        String emptyPattern = "[\\s{}]?";
+        String emptyPattern = "[\\s{}]*";
 
         // /*注释开始标记
         String startAnnotationA = "^[\\s]*/\\*.*";

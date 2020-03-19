@@ -33,8 +33,8 @@ public class ArgsUtil {
 
             if (i == args.length - 1){
                 String fileName = args[i];
-                if (!Pattern.matches("[\\u4e00-\\u9fa5a-zA-Z*0-9]+.c", fileName)){
-                    throw new RuntimeException("未传入正确的文件类型！");
+                if (!Pattern.matches("[\\u4e00-\\u9fa5a-zA-Z*0-9]+.(c|java|txt|go|py|log)", fileName)) {
+                    throw new RuntimeException("未支持的文件类型！目前支持c,java,txt,go,py,log");
                 }
             }
         }
