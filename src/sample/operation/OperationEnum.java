@@ -1,4 +1,4 @@
-package operation;
+package sample.operation;
 
 public enum OperationEnum {
 

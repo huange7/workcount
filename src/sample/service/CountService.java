@@ -1,6 +1,7 @@
-package service;
+package sample.service;
 
-import handler.Handler;
+
+import sample.handler.Handler;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,12 +17,12 @@ public interface CountService {
 
     /**
      * @title : 处理文件方法
-     * @param :[head, fileName]
+     * @param :[args]
      * @return : boolean
      * @author : huange7
      * @date : 2020-03-18 19:52
      */
-    void doHandler(Handler head, String fileName) throws IOException;
+    void doHandler(String fileDir, String[] args) throws IOException;
 
     /**
      * @title : 处理单个文件
@@ -31,5 +32,4 @@ public interface CountService {
      * @date : 2020-03-19 1:03
      */
     void readFile(Handler head, File file) throws IOException;
-
 }

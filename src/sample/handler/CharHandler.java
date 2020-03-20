@@ -1,4 +1,4 @@
-package handler;
+package sample.handler;
 
 /**
  * @ClassName CharHandler

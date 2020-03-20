@@ -1,4 +1,4 @@
-package handler;
+package sample.handler;
 
 import com.sun.deploy.util.StringUtils;
 

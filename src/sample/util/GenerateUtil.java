@@ -1,12 +1,9 @@
-package util;
+package sample.util;
 
-import com.sun.deploy.util.StringUtils;
-import handler.*;
-import operation.OperationEnum;
+import sample.handler.*;
+import sample.operation.OperationEnum;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

@@ -1,4 +1,4 @@
-package handler;
+package sample.handler;
 
 /**
  * @ClassName SpecialLineHandler
@@ -85,5 +85,29 @@ public class SpecialLineHandler extends Handler {
         System.out.println("统计出来的空行结果：【" + emptyLine +"】");
         System.out.println("统计出来的代码行结果：【" + codeLine +"】");
         System.out.println("统计出来的注释行结果：【" + annotationLine +"】");
+    }
+
+    public Integer getEmptyLine() {
+        return emptyLine;
+    }
+
+    public Integer getCodeLine() {
+        return codeLine;
+    }
+
+    public Integer getAnnotationLine() {
+        return annotationLine;
+    }
+
+    public void setEmptyLine(Integer emptyLine) {
+        this.emptyLine = emptyLine;
+    }
+
+    public void setCodeLine(Integer codeLine) {
+        this.codeLine = codeLine;
+    }
+
+    public void setAnnotationLine(Integer annotationLine) {
+        this.annotationLine = annotationLine;
     }
 }

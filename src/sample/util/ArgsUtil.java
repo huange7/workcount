@@ -1,6 +1,7 @@
-package util;
+package sample.util;
 
-import operation.OperationEnum;
+import javafx.scene.control.Alert;
+import sample.operation.OperationEnum;
 
 import java.util.regex.Pattern;
 
@@ -15,10 +16,11 @@ public class ArgsUtil {
 
     public static boolean isRecursion = false;
 
-    public static void verifyArgs(String[] args){
+    public static boolean verifyArgs(String[] args){
 
         if (args.length <= 0){
-            throw new RuntimeException("参数传输错误！请校验参数！");
+            alertTip("参数传输错误！请校验参数！");
+            return false;
         }
         for (int i = 0; i < args.length; i++){
             String arg = args[i];
@@ -27,21 +29,31 @@ public class ArgsUtil {
                 try {
                     OperationEnum.valueOf(arg.substring(1).toUpperCase());
                 } catch (IllegalArgumentException e) {
-                    throw new RuntimeException("传输了错误的参数类型：【" + arg + "】");
+                    alertTip("传输了错误的参数类型：【" + arg + "】");
+                    return false;
                 }
             }
 
             if (i == args.length - 1){
                 String fileName = args[i];
-                if (!Pattern.matches("[\\u4e00-\\u9fa5a-zA-Z*0-9]+.(c|java|txt|go|py|log)", fileName)) {
-                    throw new RuntimeException("未支持的文件类型！目前支持c,java,txt,go,py,log");
+                if (!Pattern.matches("[\\u4e00-\\u9fa5a-zA-Z*0-9?]+.(c|java|txt|go|py|log)", fileName)) {
+                    alertTip("未支持的文件类型！目前支持c,java,txt,go,py,log");
+                    return false;
                 }
             }
         }
+        return true;
     }
 
     public static String getFileName(String[] args){
         return args[args.length - 1];
+    }
+
+    public static void alertTip(String message){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.titleProperty().set("提醒");
+        alert.headerTextProperty().set(message);
+        alert.showAndWait();
     }
 
 }

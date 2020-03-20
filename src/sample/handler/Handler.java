@@ -1,4 +1,4 @@
-package handler;
+package sample.handler;
 
 /**
  * @ClassName Handler
@@ -29,6 +29,16 @@ public abstract class Handler {
      * 打印统计结果
      */
     public abstract void printCount();
+
+    /**
+     * 清空数据
+     */
+    private void clear(){
+        setCount(0);
+        if (getSuccessor() != null){
+            getSuccessor().clear();
+        }
+    }
 
     /**
      * 取值方法
