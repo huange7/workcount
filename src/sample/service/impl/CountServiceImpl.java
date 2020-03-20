@@ -107,7 +107,7 @@ public class CountServiceImpl implements CountService {
         Handler temp = head;
         while (temp != null){
             if (temp instanceof CharHandler){
-                fileResult.setCharCount(temp.getCount());
+                fileResult.setCharCount(temp.getCount() - 2);
             }else if (temp instanceof LineHandler){
                 fileResult.setLineCount(temp.getCount());
             }else if (temp instanceof WordHandler){

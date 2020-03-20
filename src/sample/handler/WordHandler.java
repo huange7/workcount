@@ -1,6 +1,7 @@
 package sample.handler;
 
-import com.sun.deploy.util.StringUtils;
+
+import sample.util.StringUtil;
 
 /**
  * @ClassName WordHandler
@@ -16,7 +17,7 @@ public class WordHandler extends Handler {
         // 将c文件中的符号转换为
         String pattern = "[,;{}()#\"':<>.\\s=%+\\-*/0-9]";
 
-        setCount(getCount() + StringUtils.splitString(line.replaceAll(pattern, " "), " ").length);
+        setCount(getCount() + StringUtil.split(line.replaceAll(pattern, " "), " ").length);
 
         if (getSuccessor() != null){
             getSuccessor().handleRequest(line);
