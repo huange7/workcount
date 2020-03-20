@@ -13,35 +13,28 @@ import java.util.List;
 public class StringUtil {
 
     public static String[] split(final String str, final String separatorChars) {
-        return splitWorker(str, separatorChars, -1, false);
+        return splitWorker(str, separatorChars);
     }
 
-    private static String[] splitWorker(final String str, final String separatorChars, final int max, final boolean preserveAllTokens) {
-        // Performance tuned for 2.0 (JDK1.4)
-        // Direct code is quicker than StringTokenizer.
-        // Also, StringTokenizer uses isSpace() not isWhitespace()
+    private static String[] splitWorker(final String str, final String separatorChars) {
 
         if (str == null) {
             return null;
         }
         final int len = str.length();
         if (len == 0) {
-            return null;
+            return new String[]{};
         }
         final List<String> list = new ArrayList<>();
         int sizePlus1 = 1;
         int i = 0, start = 0;
         boolean match = false;
-        boolean lastMatch = false;
         if (separatorChars == null) {
-            // Null separator means use whitespace
             while (i < len) {
                 if (Character.isWhitespace(str.charAt(i))) {
-                    if (match || preserveAllTokens) {
-                        lastMatch = true;
-                        if (sizePlus1++ == max) {
+                    if (match) {
+                        if (sizePlus1++ == -1) {
                             i = len;
-                            lastMatch = false;
                         }
                         list.add(str.substring(start, i));
                         match = false;
@@ -49,7 +42,6 @@ public class StringUtil {
                     start = ++i;
                     continue;
                 }
-                lastMatch = false;
                 match = true;
                 i++;
             }
@@ -58,11 +50,9 @@ public class StringUtil {
             final char sep = separatorChars.charAt(0);
             while (i < len) {
                 if (str.charAt(i) == sep) {
-                    if (match || preserveAllTokens) {
-                        lastMatch = true;
-                        if (sizePlus1++ == max) {
+                    if (match) {
+                        if (sizePlus1++ == -1) {
                             i = len;
-                            lastMatch = false;
                         }
                         list.add(str.substring(start, i));
                         match = false;
@@ -70,7 +60,6 @@ public class StringUtil {
                     start = ++i;
                     continue;
                 }
-                lastMatch = false;
                 match = true;
                 i++;
             }
@@ -78,11 +67,9 @@ public class StringUtil {
             // standard case
             while (i < len) {
                 if (separatorChars.indexOf(str.charAt(i)) >= 0) {
-                    if (match || preserveAllTokens) {
-                        lastMatch = true;
-                        if (sizePlus1++ == max) {
+                    if (match) {
+                        if (sizePlus1++ == -1) {
                             i = len;
-                            lastMatch = false;
                         }
                         list.add(str.substring(start, i));
                         match = false;
@@ -90,12 +77,11 @@ public class StringUtil {
                     start = ++i;
                     continue;
                 }
-                lastMatch = false;
                 match = true;
                 i++;
             }
         }
-        if (match || preserveAllTokens && lastMatch) {
+        if (match) {
             list.add(str.substring(start, i));
         }
         return list.toArray(new String[list.size()]);
