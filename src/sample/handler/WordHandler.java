@@ -17,8 +17,6 @@ public class WordHandler extends Handler {
         // 将c文件中的符号转换为
         String pattern = "[,;{}()#\"':<>.\\s=%+\\-*/0-9]";
 
-        System.out.println(line);
-
         setCount(getCount() + StringUtil.split(line.replaceAll(pattern, " "), " ").length);
 
         if (getSuccessor() != null){

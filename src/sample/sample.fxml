@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+
 <GridPane alignment="center" hgap="10" prefHeight="458.0" prefWidth="582.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <columnConstraints>
       <ColumnConstraints percentWidth="0.0" />
@@ -38,7 +41,7 @@
             <TextField fx:id="argsShow1" disable="true" layoutX="66.0" layoutY="425.0" prefHeight="23.0" prefWidth="407.0" style="-fx-background-color: white;" text="参数：-a 复杂数据处理   -s 递归   -c 字符统计  -w  单词统计  -l 行数统计" />
             <TextField disable="true" editable="false" layoutX="48.0" layoutY="370.0" prefHeight="23.0" prefWidth="96.0" style="-fx-background-color: white;" text="已选择文件夹：" />
             <TextField disable="true" editable="false" layoutX="48.0" layoutY="393.0" prefHeight="23.0" prefWidth="96.0" style="-fx-background-color: white;" text="已输入的参数：" />
-            <TextField fx:id="runTime" disable="true" editable="false" layoutX="505.0" layoutY="382.0" prefHeight="23.0" prefWidth="49.0" />
+            <TextField fx:id="runTime" disable="true" editable="false" layoutX="499.0" layoutY="382.0" prefHeight="23.0" prefWidth="78.0" />
             <TextField disable="true" editable="false" layoutX="418.0" layoutY="382.0" prefHeight="23.0" prefWidth="86.0" style="-fx-background-color: white;" text="运行总时间：" />
          </children>
       </Pane>

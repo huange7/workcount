@@ -40,6 +40,9 @@ public class SpecialLineHandler extends Handler {
         // /*注释行文中开始标记
         String startAnnotationB = ".*[;})][\\s]*/\\*.*";
 
+        // }注释行
+        String annotationSpecial = "^\\s*}\\s*/[*/].*";
+
         // //注释开始标记
         String startAnnotationC = "^[\\s]*//.*";
 
@@ -69,7 +72,9 @@ public class SpecialLineHandler extends Handler {
         }
 
         if (line.matches(startAnnotationB) || line.matches(startAnnotationD)){
-            codeLine++;
+            if (!line.matches(annotationSpecial)){
+                codeLine++;
+            }
         }
 
         setCount(getCount() + 1);
