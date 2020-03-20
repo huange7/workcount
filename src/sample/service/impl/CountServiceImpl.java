@@ -36,11 +36,13 @@ public class CountServiceImpl implements CountService {
         // 获取文件名称
         fileName = ArgsUtil.getFileName(args);
 
+        // 将文件名进行转换
         fileName = fileName.replaceAll("[*?]", ".*");
 
         // 获取文件夹
         File file = new File(fileDir);
 
+        // 如果输入了错误的文件夹
         if (!file.exists()){
             ArgsUtil.alertTip("文件夹不存在！");
             return;
@@ -79,13 +81,16 @@ public class CountServiceImpl implements CountService {
 
             String line;
 
+            // 一行一行进行处理
             while ((line = reader.readLine()) != null) {
                 head.handleRequest(line);
             }
 
+            // 对结果进行处理和展示
             generateResult(head, file);
         }
 
+        // 当文件属于文件夹类型，需要查看是否处于 递归 模式
         if (ArgsUtil.isRecursion && file.isDirectory()){
             File[] files = file.listFiles();
             for (File f :

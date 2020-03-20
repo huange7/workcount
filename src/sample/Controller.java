@@ -84,15 +84,22 @@ public class Controller {
 
     @FXML
     public void doHandler(ActionEvent event) {
+
+        // 判断用户是否已经选择了对应的文件夹
         if ("".equals(selectedDir.getText())){
             alertTip("请先选择一个文件夹");
             return;
         }
         long startTime = System.currentTimeMillis();
+
+        // 展示用户所输入的参数
         argsShow.setText(argField.getText());
         CountService countService = new CountServiceImpl();
         try {
+            // 对上一次统计的遗留数据进行移除
             fileData.clear();
+
+            // 开始执行计算
             countService.doHandler(selectedDir.getText(), argField.getText().split(" "));
         } catch (IOException e) {
             e.printStackTrace();
