@@ -25,11 +25,6 @@ public class CountServiceImpl implements CountService {
     @Override
     public void doHandler(String fileDir, String[] args) throws IOException {
 
-        // 校验参数是否正确
-        if (!ArgsUtil.verifyArgs(args)) {
-            return;
-        }
-
         // 获取处理链
         Handler head = GenerateUtil.generateChain(args);
 
@@ -41,12 +36,6 @@ public class CountServiceImpl implements CountService {
 
         // 获取文件夹
         File file = new File(fileDir);
-
-        // 如果输入了错误的文件夹
-        if (!file.exists()){
-            ArgsUtil.alertTip("文件夹不存在！");
-            return;
-        }
 
         // 获取文件夹下的文件
         File[] files = file.listFiles();
@@ -61,9 +50,6 @@ public class CountServiceImpl implements CountService {
 
     @Override
     public void readFile(Handler head, File file) throws IOException {
-        if (!file.exists()){
-            ArgsUtil.alertTip("文件或者文件夹不存在！");
-        }
 
         // 处理文件类型
         if (!file.isDirectory()){
@@ -93,9 +79,11 @@ public class CountServiceImpl implements CountService {
         // 当文件属于文件夹类型，需要查看是否处于 递归 模式
         if (ArgsUtil.isRecursion && file.isDirectory()){
             File[] files = file.listFiles();
-            for (File f :
-                    files) {
-                readFile(head, f);
+            if (files != null) {
+                for (File f :
+                        files) {
+                    readFile(head, f);
+                }
             }
         }
 
