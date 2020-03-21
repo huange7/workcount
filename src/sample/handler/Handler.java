@@ -33,11 +33,8 @@ public abstract class Handler {
     /**
      * 清空数据
      */
-    private void clear(){
+    public void clear(){
         setCount(0);
-        if (getSuccessor() != null){
-            getSuccessor().clear();
-        }
     }
 
     /**

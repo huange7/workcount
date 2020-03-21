@@ -1,10 +1,12 @@
 package sample.graphic;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class Graphic extends Application {
 
@@ -14,6 +16,12 @@ public class Graphic extends Application {
         primaryStage.setTitle("Word Count");
         primaryStage.setScene(new Scene(root, 582, 458));
         primaryStage.show();
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Controller.executorService.shutdown();
+            }
+        });
     }
 
 

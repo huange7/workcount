@@ -119,7 +119,7 @@ public class CountServiceImpl implements CountService {
                 ((SpecialLineHandler) temp).setEmptyLine(0);
                 ((SpecialLineHandler) temp).setCodeLine(0);
             }
-            temp.setCount(0);
+            temp.clear();
             temp = temp.getSuccessor();
         }
         fileData.add(fileResult);

@@ -73,7 +73,7 @@ public class Controller {
     /**
      * 线程池执行异步任务
      */
-    private ExecutorService executorService = Executors.newFixedThreadPool(1);
+    public static ExecutorService executorService = Executors.newFixedThreadPool(1);
 
     private boolean isHandlering = false;
 
@@ -137,9 +137,6 @@ public class Controller {
             argField.setText("");
             isHandlering = false;
         });
-
-        // 进行资源的释放
-        executorService.shutdown();
     }
 
     @FXML

@@ -96,56 +96,33 @@ public class FileResult {
         return annotationCount;
     }
 
-    public String getLocation() {
-        return locationProperty().get();
-    }
-
     public void setLocation(String location) {
         this.locationProperty().set(location);
     }
 
-    public String getCharCount() {
-        return charProperty().get();
-    }
 
     public void setCharCount(Integer charCount) {
         this.charProperty().set(String.valueOf(charCount));
     }
 
-    public String getWordCount() {
-        return wordProperty().get();
-    }
 
     public void setWordCount(Integer wordCount) {
         this.wordProperty().set(String.valueOf(wordCount));
     }
 
-    public String getLineCount() {
-        return lineProperty().getValue();
-    }
 
     public void setLineCount(Integer lineCount) {
         this.lineProperty().set(String.valueOf(lineCount));
     }
 
-    public String getEmptyCount() {
-        return emptyProperty().get();
-    }
 
     public void setEmptyCount(Integer emptyCount) {
         this.emptyProperty().set(String.valueOf(emptyCount));
     }
 
-    public String getCodeCount() {
-        return codeProperty().get();
-    }
 
     public void setCodeCount(Integer codeCount) {
         this.codeProperty().set(String.valueOf(codeCount));
-    }
-
-    public String getAnnotationCount() {
-        return annotationProperty().get();
     }
 
     public void setAnnotationCount(Integer annotationCount) {

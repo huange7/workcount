@@ -18,9 +18,6 @@ public class StringUtil {
 
     private static String[] splitWorker(final String str, final String separatorChars) {
 
-        if (str == null) {
-            return null;
-        }
         final int len = str.length();
         if (len == 0) {
             return new String[]{};
@@ -29,44 +26,11 @@ public class StringUtil {
         int sizePlus1 = 1;
         int i = 0, start = 0;
         boolean match = false;
-        if (separatorChars == null) {
-            while (i < len) {
-                if (Character.isWhitespace(str.charAt(i))) {
-                    if (match) {
-                        if (sizePlus1++ == -1) {
-                            i = len;
-                        }
-                        list.add(str.substring(start, i));
-                        match = false;
-                    }
-                    start = ++i;
-                    continue;
-                }
-                match = true;
-                i++;
-            }
-        } else if (separatorChars.length() == 1) {
+        if (separatorChars.length() == 1) {
             // Optimise 1 character case
             final char sep = separatorChars.charAt(0);
             while (i < len) {
                 if (str.charAt(i) == sep) {
-                    if (match) {
-                        if (sizePlus1++ == -1) {
-                            i = len;
-                        }
-                        list.add(str.substring(start, i));
-                        match = false;
-                    }
-                    start = ++i;
-                    continue;
-                }
-                match = true;
-                i++;
-            }
-        } else {
-            // standard case
-            while (i < len) {
-                if (separatorChars.indexOf(str.charAt(i)) >= 0) {
                     if (match) {
                         if (sizePlus1++ == -1) {
                             i = len;

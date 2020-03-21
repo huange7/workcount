@@ -22,6 +22,7 @@ public class MainApplication {
         }
 
         // 非图形界面进行操作
+        System.out.println("开始计算中...");
         CountService countService = new CountServiceImpl();
         String selectDir = ArgsUtil.getSelectDir(args);
         try {
