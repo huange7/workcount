@@ -18,6 +18,8 @@ public class ArgsUtil {
 
     public static boolean verifyArgs(String[] args){
 
+        boolean hasArg = false;
+
         if (args.length <= 0){
             alertTip("参数传输错误！请校验参数！");
             return false;
@@ -26,22 +28,33 @@ public class ArgsUtil {
             String arg = args[i];
             // 查看是否是已经有的枚举类
             if (arg.startsWith("-")){
+                // 如果是-s则不用校验
+                if ("-s".equals(arg)){
+                    continue;
+                }
                 try {
                     OperationEnum.valueOf(arg.substring(1).toUpperCase());
                 } catch (IllegalArgumentException e) {
                     alertTip("传输了错误的参数类型：【" + arg + "】");
                     return false;
                 }
+                hasArg = true;
             }
 
             if (i == args.length - 1){
                 String fileName = args[i];
-                if (!Pattern.matches("[\\u4e00-\\u9fa5a-zA-Z*0-9?]+.(c|java|txt|go|py|log)", fileName)) {
+                if (!Pattern.matches("[\\u4e00-\\u9fa5a-zA-Z*0-9?\\-.]+.(c|java|txt|go|py|log)", fileName)) {
                     alertTip("未支持的文件类型！目前支持c,java,txt,go,py,log");
                     return false;
                 }
             }
         }
+
+        if (!hasArg){
+            alertTip("未输入执行的参数！有效的参数为：【-a】,【-c】,【-w】,【-l】");
+            return false;
+        }
+
         return true;
     }
 
