@@ -1,4 +1,4 @@
-package sample;
+package sample.graphic;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -22,7 +22,9 @@ import java.util.concurrent.*;
 
 import static sample.util.ArgsUtil.alertTip;
 
-
+/**
+ *  控制类
+ */
 public class Controller {
 
     @FXML
@@ -108,7 +110,7 @@ public class Controller {
         }
 
         // 校验参数是否正确
-        if (!ArgsUtil.verifyArgs(argField.getText().split(" "))) {
+        if (!ArgsUtil.verifyArgs(argField.getText().split(" "), true)) {
             return;
         }
 
@@ -136,6 +138,8 @@ public class Controller {
             isHandlering = false;
         });
 
+        // 进行资源的释放
+        executorService.shutdown();
     }
 
     @FXML

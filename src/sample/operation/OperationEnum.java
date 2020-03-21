@@ -21,7 +21,11 @@ public enum OperationEnum {
     /**
      *  A ：返回更复杂的数据
      */
-    A("-a");
+    A("-a"),
+    /**
+     *  X ：启动图形界面
+     */
+    X("-x");
 
     private String operation;
 

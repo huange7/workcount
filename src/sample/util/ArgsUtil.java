@@ -3,6 +3,7 @@ package sample.util;
 import javafx.scene.control.Alert;
 import sample.operation.OperationEnum;
 
+import java.io.File;
 import java.util.regex.Pattern;
 
 /**
@@ -16,12 +17,18 @@ public class ArgsUtil {
 
     public static boolean isRecursion = false;
 
-    public static boolean verifyArgs(String[] args){
+    public static boolean isGraphical = false;
+
+    public static boolean verifyArgs(String[] args, boolean isXCall){
 
         boolean hasArg = false;
 
         if (args.length <= 0){
-            alertTip("参数传输错误！请校验参数！");
+            if (isXCall) {
+                alertTip("参数传输错误！请校验参数！");
+            }else {
+                System.out.println("参数传输错误！请校验参数！");
+            }
             return false;
         }
         for (int i = 0; i < args.length; i++){
@@ -32,10 +39,22 @@ public class ArgsUtil {
                 if ("-s".equals(arg)){
                     continue;
                 }
+                if (isXCall && "-x".equals(arg)){
+                    alertTip("当前已经处于图形界面模式！");
+                    return false;
+                }
+                if (!isGraphical && "-x".equals(arg)){
+                    isGraphical = true;
+                    continue;
+                }
                 try {
                     OperationEnum.valueOf(arg.substring(1).toUpperCase());
                 } catch (IllegalArgumentException e) {
-                    alertTip("传输了错误的参数类型：【" + arg + "】");
+                    if (isXCall) {
+                        alertTip("传输了错误的参数类型：【" + arg + "】");
+                    }else {
+                        System.out.println("传输了错误的参数类型：【" + arg + "】");
+                    }
                     return false;
                 }
                 hasArg = true;
@@ -43,15 +62,23 @@ public class ArgsUtil {
 
             if (i == args.length - 1){
                 String fileName = args[i];
-                if (!Pattern.matches("[\\u4e00-\\u9fa5a-zA-Z*0-9?\\-.]+.(c|java|txt|go|py|log)", fileName)) {
-                    alertTip("未支持的文件类型！目前支持c,java,txt,go,py,log");
+                if (!Pattern.matches(".*\\.(c|java|txt|go|py|log)", fileName)) {
+                    if (isXCall) {
+                        alertTip("未支持的文件类型！目前支持c,java,txt,go,py,log");
+                    }else {
+                        System.out.println("未支持的文件类型！目前支持c,java,txt,go,py,log");
+                    }
                     return false;
                 }
             }
         }
 
         if (!hasArg){
-            alertTip("未输入执行的参数！有效的参数为：【-a】,【-c】,【-w】,【-l】");
+            if (isXCall) {
+                alertTip("未输入执行的参数！有效的参数为：【-a】,【-c】,【-w】,【-l】");
+            }else {
+                System.out.println("未输入执行的参数！有效的参数为：【-a】,【-c】,【-w】,【-l】");
+            }
             return false;
         }
 
@@ -59,7 +86,11 @@ public class ArgsUtil {
     }
 
     public static String getFileName(String[] args){
-        return args[args.length - 1];
+        String dir = args[args.length - 1];
+        if (dir.contains("\\")){
+            dir =  dir.substring(dir.lastIndexOf("\\") + 1);
+        }
+        return dir;
     }
 
     public static void alertTip(String message){
@@ -67,6 +98,24 @@ public class ArgsUtil {
         alert.titleProperty().set("提醒");
         alert.headerTextProperty().set(message);
         alert.showAndWait();
+    }
+
+    public static String getSelectDir(String[] args){
+        // 获取最后一个文件名称
+        String fileName = args[args.length - 1];
+
+        // 截取前面的文件夹
+        String dir = System.getProperty("user.dir");
+        if (fileName.contains("\\")){
+            dir = fileName.substring(0, fileName.lastIndexOf("\\"));
+        }
+        return dir;
+
+
+
+
+
+
     }
 
 }

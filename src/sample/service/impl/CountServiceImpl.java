@@ -9,7 +9,7 @@ import sample.util.GenerateUtil;
 
 import java.io.*;
 
-import static sample.Controller.fileData;
+import static sample.graphic.Controller.fileData;
 
 /**
  * @ClassName CountServiceImpl
@@ -36,6 +36,11 @@ public class CountServiceImpl implements CountService {
 
         // 获取文件夹
         File file = new File(fileDir);
+
+        if (!file.exists()){
+            System.out.println("文件或者文件夹不存在！");
+            return;
+        }
 
         // 获取文件夹下的文件
         File[] files = file.listFiles();
@@ -73,7 +78,11 @@ public class CountServiceImpl implements CountService {
             }
 
             // 对结果进行处理和展示
-            generateResult(head, file);
+            if (ArgsUtil.isGraphical){
+                generateResult(head, file);
+            }else{
+                showResult(head, file);
+            }
         }
 
         // 当文件属于文件夹类型，需要查看是否处于 递归 模式
@@ -114,5 +123,19 @@ public class CountServiceImpl implements CountService {
             temp = temp.getSuccessor();
         }
         fileData.add(fileResult);
+    }
+
+    private void showResult(Handler head, File file){
+        System.out.println("-----------------------------------------");
+        System.out.println("文件位置为：" + file.getAbsolutePath());
+        System.out.println("-----------------------------------------");
+        System.out.println("文件名称为：" + fileName);
+        System.out.println("-----------------------------------------");
+        Handler temp = head;
+        while(temp != null){
+            temp.printCount();
+            temp = temp.getSuccessor();
+            System.out.println("-----------------------------------------");
+        }
     }
 }
