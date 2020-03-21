@@ -33,7 +33,7 @@
               </columns>
             </TableView>
             <Button fx:id="doHandler" layoutX="448.0" layoutY="340.0" mnemonicParsing="false" onAction="#doHandler" style="-fx-background-radius: 5;" text="运行" />
-            <TextField fx:id="argField" layoutX="146.0" layoutY="340.0" prefHeight="23.0" prefWidth="195.0" />
+            <TextField fx:id="argField" layoutX="146.0" layoutY="340.0" prefHeight="23.0" prefWidth="195.0" promptText="参数举例：-a -s -c -w -l *.c" />
             <TextField disable="true" editable="false" layoutX="60.0" layoutY="340.0" prefHeight="23.0" prefWidth="86.0" style="-fx-background-color: white;" text="请输入参数：" />
             <Button fx:id="selectFile" layoutX="341.0" layoutY="340.0" mnemonicParsing="false" onAction="#selectFile" text="..." />
             <TextField fx:id="selectedDir" disable="true" editable="false" layoutX="147.0" layoutY="370.0" prefHeight="23.0" prefWidth="219.0" style="-fx-background-color: white;" />
