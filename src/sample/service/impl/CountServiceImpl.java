@@ -129,13 +129,20 @@ public class CountServiceImpl implements CountService {
         System.out.println("-----------------------------------------");
         System.out.println("文件位置为：" + file.getAbsolutePath());
         System.out.println("-----------------------------------------");
-        System.out.println("文件名称为：" + fileName);
+        System.out.println("文件名称为：" + file.getName());
         System.out.println("-----------------------------------------");
         Handler temp = head;
         while(temp != null){
             temp.printCount();
-            temp = temp.getSuccessor();
             System.out.println("-----------------------------------------");
+            if (temp instanceof SpecialLineHandler){
+                // 清除数据
+                ((SpecialLineHandler) temp).setAnnotationLine(0);
+                ((SpecialLineHandler) temp).setEmptyLine(0);
+                ((SpecialLineHandler) temp).setCodeLine(0);
+            }
+            temp.clear();
+            temp = temp.getSuccessor();
         }
     }
 }
